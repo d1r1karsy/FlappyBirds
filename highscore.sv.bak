@@ -1,0 +1,33 @@
+module highscore (on, hex0, hex1, hex2, hex3, hi0, hi1, hi2, hi3, out0, out1, out2, out3, out4, out5);
+	input logic on;
+	input logic  [3:0] hex0, hex1, hex2, hex3, hi0, hi1, hi2, hi3;
+	output logic [3:0] out0, out1, out2, out3, out4, out5;
+	logic 
+	
+	seg7 seg0 (.bcd(hex0), .leds(out0));
+	seg7 seg1 (.bcd(hex1), .leds(out1));
+	seg7 seg2 (.bcd(hex2), .leds(out2));
+	seg7 seg3 (.bcd(hex3), .leds(out3));
+	
+	always_comb begin
+		case (on)
+			1'b1: begin
+						seg7 seg0 (.bcd(hi0), .leds(out0));
+						seg7 seg1 (.bcd(hi1), .leds(out1));
+						seg7 seg2 (.bcd(hi2), .leds(out2));
+						seg7 seg3 (.bcd(hi3), .leds(out3));
+						out4 = 7'b0001001;
+						out5 = 7'b0001001;
+					end
+			1'b0: begin
+						seg7 seg0 (.bcd(hex0), .leds(out0));
+						seg7 seg1 (.bcd(hex1), .leds(out1));
+						seg7 seg2 (.bcd(hex2), .leds(out2));
+						seg7 seg3 (.bcd(hex3), .leds(out3));
+						out4 = 7'b1111111;
+						out5 = 7'b1111111;
+					end
+		endcase
+	end
+	
+endmodule

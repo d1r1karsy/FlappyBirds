@@ -1,0 +1,24 @@
+module normalLight (clk, reset, L, R, NL, NR, light);
+	input logic clk, reset, L, R, NL, NR;
+	output logic light;
+	
+	enum { ON, OFF } ps, ns;
+	
+	always_comb begin
+		case (ps)
+			ON:  if ((~L & R) | (L &  ~R))					ns = OFF;
+				  else							 					ns = ON;
+ 			OFF: if ((~L & R & NL) | (L & ~R & NR))		ns = ON;
+				  else 												ns = OFF;
+		endcase
+	end
+
+	assign light = (ns == ON);
+	
+	always_ff @(posedge clk) begin
+		if (reset)
+			ps <= OFF;
+		else
+			ps <= ns;
+	end
+endmodule 

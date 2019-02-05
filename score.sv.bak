@@ -1,0 +1,22 @@
+module score (clk, reset, green_array, hex, out);
+	input logic clk, reset;
+	input logic [7:0][7:0] green_array;
+	output logic out
+	output logic [3:0] hex;
+	logic [3:0] counter;
+
+	// Output logic
+	assign hex = counter;
+	assign out = ((counter == 4'b1001) & (green_array[7][6] | green_array[6][6] | green_array[5][6] | green_array[4][6] | green_array[3][6] | green_array[2][6] | green_array[1][6] | green_array[0][6]));
+	
+	// DFFs
+	always_ff @(posedge clk) begin
+		if (reset | ((counter == 4'b1001) & (green_array[7][6] | green_array[6][6] | green_array[5][6] | green_array[4][6] | green_array[3][6] | green_array[2][6] | green_array[1][6] | green_array[0][6])))
+			counter <= 4'b0000;
+		else if (green_array[7][6] | green_array[6][6] | green_array[5][6] | green_array[4][6] | green_array[3][6] | green_array[2][6] | green_array[1][6] | green_array[0][6])
+			counter <= counter + 4'b0001; 
+		else
+			counter <= counter; 
+	end
+	
+endmodule 

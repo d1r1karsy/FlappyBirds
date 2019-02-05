@@ -1,0 +1,26 @@
+module startColumn (clk, reset, enable2, enable3, light8, light7, light6, light5, light4, light3, light2, light1);
+	input logic clk, reset, 
+	output logic light;
+	
+	// State variables
+	enum { ON, OFF } ps, ns;
+	
+	// Next state logic
+	always_comb begin
+		case (ps)
+			ON:  if (enable2) begin light8=1'b1; light7=1'b1; light6=1'b1; light5=1'b0; light4=1'b0; light3=1'b0; light2=1'b1; light1=1'b1; ns = OFF; end
+				  else 			begin light8=1'b1; light7=1'b1; light6=1'b1; light5=1'b0; light4=1'b0; light3=1'b0; light2=1'b1; light1=1'b1; ns = ON; end
+ 			OFF: if (enable3)	begin light8=1'b0; light7=1'b0; light6=1'b0; light5=1'b0; light4=1'b0; light3=1'b0; light2=1'b0; light1=1'b0; ns = ON; end
+				  else 			begin light8=1'b0; light7=1'b0; light6=1'b0; light5=1'b0; light4=1'b0; light3=1'b0; light2=1'b0; light1=1'b0; ns = OFF; end
+		endcase
+	end
+	
+	// DFFs
+	always_ff @(posedge clk) begin
+		if (reset)
+			ps <= ON;
+		else
+			ps <= ns;
+	end
+	
+endmodule 

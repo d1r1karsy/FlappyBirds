@@ -1,0 +1,25 @@
+module calm (clk, reset, out);  
+   input  logic  clk, reset, w;   
+   output logic  [2:0] out;    
+   // State variables.   
+   enum { A, B } ps, ns;    
+   // Next State logic   
+   always_comb begin  
+      case (ps)    
+         A: ns = B; 
+         B: ns = A;     
+      endcase   
+   end    
+   // Output logic
+   assign out[2] = (ps == A);  
+	assign out[1] = (ps == B);  
+	assign out[0] = (ps == A); 
+	
+   // DFFs   
+   always_ff @(posedge clk) begin    
+      if (reset)   
+         ps <= A;  
+      else   
+         ps <= ns;    
+   end    
+endmodule

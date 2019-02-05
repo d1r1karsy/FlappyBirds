@@ -1,0 +1,18 @@
+module normalColumn (clk, reset, enable2, ol8, ol7, ol6, ol5, ol4, ol3, ol2, ol1, light8, light7, light6, light5, light4, light3, light2, light1);
+	input logic clk, reset, enable2, ol8, ol7, ol6, ol5, ol4, ol3, ol2, ol1;
+	output logic light8, light7, light6, light5, light4, light3, light2, light1;
+	
+	// DFFs
+	always_ff @(posedge clk) begin
+		if (reset) begin
+			light8 <= 1'b0; light7 <= 1'b0; light6 <= 1'b0; light5 <= 1'b0; light4 <= 1'b0; light3 <= 1'b0; light2 <= 1'b0; light1 <= 1'b0;
+		end
+		else if (enable2) begin
+			light8 <= ol8; light7 <= ol7; light6 <= ol6; light5 <= ol5; light <= ol4; light3 <= ol3; light2 <= ol2; light1 <= ol1;
+		end
+		else begin
+			light8 <= light8; light7 <= light7; light6 <= light6; light5 <= light5; light <= light4; light3 <= light3; light2 <= light2; light1 <= light1;
+		end
+	end
+	
+endmodule 

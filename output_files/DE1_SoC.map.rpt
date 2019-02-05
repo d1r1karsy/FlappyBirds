@@ -1,0 +1,621 @@
+Analysis & Synthesis report for DE1_SoC
+Wed Nov 28 14:56:48 2018
+Quartus Prime Version 17.0.1 Build 598 06/07/2017 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Logic Cells Representing Combinational Loops
+  9. Registers Removed During Synthesis
+ 10. Removed Registers Triggering Further Register Optimizations
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Parameter Settings for User Entity Instance: Top-level Entity: |DE1_SoC
+ 14. Port Connectivity Checks: "pauseGame:stop"
+ 15. Port Connectivity Checks: "increment:s3"
+ 16. Port Connectivity Checks: "collision:dead2"
+ 17. Port Connectivity Checks: "normalLight:bird1"
+ 18. Port Connectivity Checks: "normalLight:bird8"
+ 19. Port Connectivity Checks: "clock_divider:cdiv"
+ 20. Post-Synthesis Netlist Statistics for Top Partition
+ 21. Elapsed Time Per Partition
+ 22. Analysis & Synthesis Messages
+ 23. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++---------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Wed Nov 28 14:56:47 2018           ;
+; Quartus Prime Version           ; 17.0.1 Build 598 06/07/2017 SJ Standard Edition ;
+; Revision Name                   ; DE1_SoC                                         ;
+; Top-level Entity Name           ; DE1_SoC                                         ;
+; Family                          ; Cyclone V                                       ;
+; Logic utilization (in ALMs)     ; N/A                                             ;
+; Total registers                 ; 156                                             ;
+; Total pins                      ; 103                                             ;
+; Total virtual pins              ; 0                                               ;
+; Total block memory bits         ; 0                                               ;
+; Total DSP Blocks                ; 0                                               ;
+; Total HSSI RX PCSs              ; 0                                               ;
+; Total HSSI PMA RX Deserializers ; 0                                               ;
+; Total HSSI TX PCSs              ; 0                                               ;
+; Total HSSI PMA TX Serializers   ; 0                                               ;
+; Total PLLs                      ; 0                                               ;
+; Total DLLs                      ; 0                                               ;
++---------------------------------+-------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
+; Top-level entity name                                                           ; DE1_SoC            ; DE1_SoC            ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; State Machine Processing                                                        ; User-Encoded       ; Auto               ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation      ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; OpenCore Plus hardware evaluation                                               ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; PowerPlay Power Optimization During Synthesis                                   ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 6           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-6         ;   0.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                       ;
++----------------------------------+-----------------+------------------------------+--------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path   ; Library ;
++----------------------------------+-----------------+------------------------------+--------------------------------+---------+
+; counter2.sv                      ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/counter2.sv      ;         ;
+; bounds.sv                        ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/bounds.sv        ;         ;
+; seg7.sv                          ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/seg7.sv          ;         ;
+; useInput.sv                      ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/useInput.sv      ;         ;
+; DE1_SoC.sv                       ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/DE1_SoC.sv       ;         ;
+; centerLight.sv                   ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/centerLight.sv   ;         ;
+; normalLight.sv                   ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/normalLight.sv   ;         ;
+; random.sv                        ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/random.sv        ;         ;
+; compare.sv                       ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/compare.sv       ;         ;
+; matrix_driver.sv                 ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/matrix_driver.sv ;         ;
+; counter1.sv                      ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/counter1.sv      ;         ;
+; startColumn.sv                   ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/startColumn.sv   ;         ;
+; counter3.sv                      ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/counter3.sv      ;         ;
+; normalColumn.sv                  ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/normalColumn.sv  ;         ;
+; collision.sv                     ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/collision.sv     ;         ;
+; score.sv                         ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/score.sv         ;         ;
+; increment.sv                     ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/increment.sv     ;         ;
+; highscore.sv                     ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/highscore.sv     ;         ;
+; pauseGame.sv                     ; yes             ; User SystemVerilog HDL File  ; U:/EE271/lab8/pauseGame.sv     ;         ;
++----------------------------------+-----------------+------------------------------+--------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                         ;
++---------------------------------------------+---------------------------------------+
+; Resource                                    ; Usage                                 ;
++---------------------------------------------+---------------------------------------+
+; Estimate of Logic utilization (ALMs needed) ; 171                                   ;
+;                                             ;                                       ;
+; Combinational ALUT usage for logic          ; 252                                   ;
+;     -- 7 input functions                    ; 0                                     ;
+;     -- 6 input functions                    ; 83                                    ;
+;     -- 5 input functions                    ; 9                                     ;
+;     -- 4 input functions                    ; 56                                    ;
+;     -- <=3 input functions                  ; 104                                   ;
+;                                             ;                                       ;
+; Dedicated logic registers                   ; 156                                   ;
+;                                             ;                                       ;
+; I/O pins                                    ; 103                                   ;
+;                                             ;                                       ;
+; Total DSP Blocks                            ; 0                                     ;
+;                                             ;                                       ;
+; Maximum fan-out node                        ; clock_divider:cdiv|divided_clocks[14] ;
+; Maximum fan-out                             ; 136                                   ;
+; Total fan-out                               ; 1649                                  ;
+; Average fan-out                             ; 2.69                                  ;
++---------------------------------------------+---------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                 ;
++-----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------+---------------+--------------+
+; Compilation Hierarchy Node  ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                           ; Entity Name   ; Library Name ;
++-----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------+---------------+--------------+
+; |DE1_SoC                    ; 252 (6)             ; 156 (6)                   ; 0                 ; 0          ; 103  ; 0            ; |DE1_SoC                                      ; DE1_SoC       ; work         ;
+;    |bounds:dead1|           ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|bounds:dead1                         ; bounds        ; work         ;
+;    |centerLight:bird5|      ; 2 (2)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|centerLight:bird5                    ; centerLight   ; work         ;
+;    |clock_divider:cdiv|     ; 15 (15)             ; 15 (15)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|clock_divider:cdiv                   ; clock_divider ; work         ;
+;    |collision:dead2|        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|collision:dead2                      ; collision     ; work         ;
+;    |counter1:countone|      ; 13 (13)             ; 10 (10)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|counter1:countone                    ; counter1      ; work         ;
+;    |counter2:counttwo|      ; 13 (13)             ; 11 (11)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|counter2:counttwo                    ; counter2      ; work         ;
+;    |counter3:countthree|    ; 13 (13)             ; 13 (13)                   ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|counter3:countthree                  ; counter3      ; work         ;
+;    |highscore:hi|           ; 77 (16)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|highscore:hi                         ; highscore     ; work         ;
+;       |compare:com0|        ; 33 (33)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|highscore:hi|compare:com0            ; compare       ; work         ;
+;       |seg7:seg0|           ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|highscore:hi|seg7:seg0               ; seg7          ; work         ;
+;       |seg7:seg1|           ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|highscore:hi|seg7:seg1               ; seg7          ; work         ;
+;       |seg7:seg2|           ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|highscore:hi|seg7:seg2               ; seg7          ; work         ;
+;       |seg7:seg3|           ; 7 (7)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|highscore:hi|seg7:seg3               ; seg7          ; work         ;
+;    |increment:s1|           ; 8 (7)               ; 5 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|increment:s1                         ; increment     ; work         ;
+;       |useInput:loc_in|     ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|increment:s1|useInput:loc_in         ; useInput      ; work         ;
+;    |increment:s2|           ; 8 (7)               ; 5 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|increment:s2                         ; increment     ; work         ;
+;       |useInput:loc_in|     ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|increment:s2|useInput:loc_in         ; useInput      ; work         ;
+;    |increment:s3|           ; 7 (6)               ; 5 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|increment:s3                         ; increment     ; work         ;
+;       |useInput:loc_in|     ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|increment:s3|useInput:loc_in         ; useInput      ; work         ;
+;    |matrix_driver:out|      ; 40 (40)             ; 3 (3)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|matrix_driver:out                    ; matrix_driver ; work         ;
+;    |normalColumn:col1|      ; 11 (11)             ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalColumn:col1                    ; normalColumn  ; work         ;
+;    |normalColumn:col2|      ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalColumn:col2                    ; normalColumn  ; work         ;
+;    |normalColumn:col3|      ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalColumn:col3                    ; normalColumn  ; work         ;
+;    |normalColumn:col4|      ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalColumn:col4                    ; normalColumn  ; work         ;
+;    |normalColumn:col5|      ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalColumn:col5                    ; normalColumn  ; work         ;
+;    |normalColumn:col6|      ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalColumn:col6                    ; normalColumn  ; work         ;
+;    |normalColumn:col7|      ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalColumn:col7                    ; normalColumn  ; work         ;
+;    |normalColumn:col8|      ; 0 (0)               ; 8 (8)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalColumn:col8                    ; normalColumn  ; work         ;
+;    |normalLight:bird1|      ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalLight:bird1                    ; normalLight   ; work         ;
+;    |normalLight:bird2|      ; 2 (2)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalLight:bird2                    ; normalLight   ; work         ;
+;    |normalLight:bird3|      ; 2 (2)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalLight:bird3                    ; normalLight   ; work         ;
+;    |normalLight:bird4|      ; 2 (2)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalLight:bird4                    ; normalLight   ; work         ;
+;    |normalLight:bird6|      ; 2 (2)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalLight:bird6                    ; normalLight   ; work         ;
+;    |normalLight:bird7|      ; 2 (2)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalLight:bird7                    ; normalLight   ; work         ;
+;    |normalLight:bird8|      ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|normalLight:bird8                    ; normalLight   ; work         ;
+;    |score:s0|               ; 9 (9)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|score:s0                             ; score         ; work         ;
+;    |startColumn:initialcol| ; 14 (6)              ; 5 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|startColumn:initialcol               ; startColumn   ; work         ;
+;       |random:num|          ; 4 (4)               ; 4 (4)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|startColumn:initialcol|random:num    ; random        ; work         ;
+;       |useInput:enab|       ; 4 (4)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|startColumn:initialcol|useInput:enab ; useInput      ; work         ;
+;    |useInput:player|        ; 1 (1)               ; 1 (1)                     ; 0                 ; 0          ; 0    ; 0            ; |DE1_SoC|useInput:player                      ; useInput      ; work         ;
++-----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------+---------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-------------------------------------------------------------+
+; Logic Cells Representing Combinational Loops                ;
++--------------------------------------------------------+----+
+; Logic Cell Name                                        ;    ;
++--------------------------------------------------------+----+
+; highscore:hi|compare:com0|out0[0]~3                    ;    ;
+; highscore:hi|compare:com0|out0[1]~2                    ;    ;
+; highscore:hi|compare:com0|out0[2]~1                    ;    ;
+; highscore:hi|compare:com0|out0[3]~0                    ;    ;
+; highscore:hi|compare:com0|out1[0]~3                    ;    ;
+; highscore:hi|compare:com0|out1[1]~2                    ;    ;
+; highscore:hi|compare:com0|out1[2]~1                    ;    ;
+; highscore:hi|compare:com0|out1[3]~0                    ;    ;
+; highscore:hi|compare:com0|out2[0]~3                    ;    ;
+; highscore:hi|compare:com0|out2[1]~2                    ;    ;
+; highscore:hi|compare:com0|out2[2]~1                    ;    ;
+; highscore:hi|compare:com0|out2[3]~0                    ;    ;
+; highscore:hi|compare:com0|out3[0]~3                    ;    ;
+; highscore:hi|compare:com0|out3[1]~2                    ;    ;
+; highscore:hi|compare:com0|out3[2]~1                    ;    ;
+; highscore:hi|compare:com0|out3[3]~0                    ;    ;
+; Number of logic cells representing combinational loops ; 16 ;
++--------------------------------------------------------+----+
+Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++-----------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                      ;
++------------------------------------------------+----------------------------------------+
+; Register name                                  ; Reason for Removal                     ;
++------------------------------------------------+----------------------------------------+
+; increment:s3|useInput:loc_in|ps[1..31]         ; Stuck at GND due to stuck port data_in ;
+; increment:s2|useInput:loc_in|ps[1..31]         ; Stuck at GND due to stuck port data_in ;
+; increment:s1|useInput:loc_in|ps[1..31]         ; Stuck at GND due to stuck port data_in ;
+; startColumn:initialcol|useInput:enab|ps[1..31] ; Stuck at GND due to stuck port data_in ;
+; bounds:dead1|ps[1..31]                         ; Stuck at GND due to stuck port data_in ;
+; useInput:player|ps[1..31]                      ; Stuck at GND due to stuck port data_in ;
+; centerLight:bird5|ps[1..9,11..31]              ; Merged with centerLight:bird5|ps[10]   ;
+; normalLight:bird1|ps[1..31]                    ; Merged with centerLight:bird5|ps[10]   ;
+; normalLight:bird2|ps[1..31]                    ; Merged with centerLight:bird5|ps[10]   ;
+; normalLight:bird3|ps[1..31]                    ; Merged with centerLight:bird5|ps[10]   ;
+; normalLight:bird4|ps[1..31]                    ; Merged with centerLight:bird5|ps[10]   ;
+; normalLight:bird6|ps[1..31]                    ; Merged with centerLight:bird5|ps[10]   ;
+; normalLight:bird7|ps[1..31]                    ; Merged with centerLight:bird5|ps[10]   ;
+; normalLight:bird8|ps[1..31]                    ; Merged with centerLight:bird5|ps[10]   ;
+; centerLight:bird5|ps[10]                       ; Stuck at GND due to stuck port data_in ;
+; clock_divider:cdiv|divided_clocks[15..31]      ; Lost fanout                            ;
+; Total Number of Removed Registers = 451        ;                                        ;
++------------------------------------------------+----------------------------------------+
+
+
++-----------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                             ;
++--------------------+---------------------------+----------------------------------------+
+; Register name      ; Reason for Removal        ; Registers Removed due to This Register ;
++--------------------+---------------------------+----------------------------------------+
+; bounds:dead1|ps[1] ; Stuck at GND              ; centerLight:bird5|ps[10]               ;
+;                    ; due to stuck port data_in ;                                        ;
++--------------------+---------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 156   ;
+; Number of registers using Synchronous Clear  ; 93    ;
+; Number of registers using Synchronous Load   ; 1     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 67    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE1_SoC|score:s0|counter[3]               ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE1_SoC|increment:s1|counter[3]           ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE1_SoC|increment:s2|counter[0]           ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DE1_SoC|increment:s3|counter[1]           ;
+; 3:1                ; 56 bits   ; 112 LEs       ; 0 LEs                ; 112 LEs                ; Yes        ; |DE1_SoC|normalColumn:col8|light1          ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |DE1_SoC|normalColumn:col1|light2          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |DE1_SoC|highscore:hi|compare:com0|out2[2] ;
+; 16:1               ; 9 bits    ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; No         ; |DE1_SoC|matrix_driver:out|Mux15           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |DE1_SoC ;
++----------------+-------+------------------------------------------------+
+; Parameter Name ; Value ; Type                                           ;
++----------------+-------+------------------------------------------------+
+; whichClock     ; 14    ; Signed Integer                                 ;
++----------------+-------+------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------+
+; Port Connectivity Checks: "pauseGame:stop"           ;
++--------------------+-------+----------+--------------+
+; Port               ; Type  ; Severity ; Details      ;
++--------------------+-------+----------+--------------+
+; red_array[7][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[7][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[6][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[6][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[5][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[5][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[4][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[4][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[3][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[3][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[2][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[2][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[1][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[1][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[0][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[0][7]    ; Input ; Info     ; Stuck at GND ;
++--------------------+-------+----------+--------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "increment:s3"                                                                       ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; out  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; Port Connectivity Checks: "collision:dead2"          ;
++--------------------+-------+----------+--------------+
+; Port               ; Type  ; Severity ; Details      ;
++--------------------+-------+----------+--------------+
+; red_array[7][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[7][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[6][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[6][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[5][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[5][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[4][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[4][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[3][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[3][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[2][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[2][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[1][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[1][7]    ; Input ; Info     ; Stuck at GND ;
+; red_array[0][5..0] ; Input ; Info     ; Stuck at GND ;
+; red_array[0][7]    ; Input ; Info     ; Stuck at GND ;
++--------------------+-------+----------+--------------+
+
+
++-----------------------------------------------+
+; Port Connectivity Checks: "normalLight:bird1" ;
++--------+-------+----------+-------------------+
+; Port   ; Type  ; Severity ; Details           ;
++--------+-------+----------+-------------------+
+; bottom ; Input ; Info     ; Stuck at GND      ;
++--------+-------+----------+-------------------+
+
+
++-----------------------------------------------+
+; Port Connectivity Checks: "normalLight:bird8" ;
++------+-------+----------+---------------------+
+; Port ; Type  ; Severity ; Details             ;
++------+-------+----------+---------------------+
+; top  ; Input ; Info     ; Stuck at GND        ;
++------+-------+----------+---------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "clock_divider:cdiv"                                                                                   ;
++------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port                   ; Type   ; Severity ; Details                                                                             ;
++------------------------+--------+----------+-------------------------------------------------------------------------------------+
+; divided_clocks[31..15] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; divided_clocks[13..0]  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 156                         ;
+;     ENA               ; 11                          ;
+;     ENA SCLR          ; 56                          ;
+;     SCLR              ; 37                          ;
+;     SLD               ; 1                           ;
+;     plain             ; 51                          ;
+; arriav_lcell_comb     ; 267                         ;
+;     arith             ; 48                          ;
+;         1 data inputs ; 44                          ;
+;         2 data inputs ; 4                           ;
+;     normal            ; 219                         ;
+;         0 data inputs ; 2                           ;
+;         1 data inputs ; 16                          ;
+;         2 data inputs ; 8                           ;
+;         3 data inputs ; 45                          ;
+;         4 data inputs ; 56                          ;
+;         5 data inputs ; 9                           ;
+;         6 data inputs ; 83                          ;
+; boundary_port         ; 103                         ;
+;                       ;                             ;
+; Max LUT depth         ; 4.00                        ;
+; Average LUT depth     ; 2.28                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:04     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 17.0.1 Build 598 06/07/2017 SJ Standard Edition
+    Info: Processing started: Wed Nov 28 14:56:16 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE1_SoC -c DE1_SoC
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (12021): Found 2 design units, including 2 entities, in source file counter2.sv
+    Info (12023): Found entity 1: counter2 File: U:/EE271/lab8/counter2.sv Line: 3
+    Info (12023): Found entity 2: counter2_testbench File: U:/EE271/lab8/counter2.sv Line: 21
+Info (12021): Found 2 design units, including 2 entities, in source file bounds.sv
+    Info (12023): Found entity 1: bounds File: U:/EE271/lab8/bounds.sv Line: 2
+    Info (12023): Found entity 2: bounds_testbench File: U:/EE271/lab8/bounds.sv Line: 32
+Info (12021): Found 2 design units, including 2 entities, in source file seg7.sv
+    Info (12023): Found entity 1: seg7 File: U:/EE271/lab8/seg7.sv Line: 2
+    Info (12023): Found entity 2: seg7_testbench File: U:/EE271/lab8/seg7.sv Line: 24
+Info (12021): Found 2 design units, including 2 entities, in source file useinput.sv
+    Info (12023): Found entity 1: useInput File: U:/EE271/lab8/useInput.sv Line: 2
+    Info (12023): Found entity 2: useInput_testbench File: U:/EE271/lab8/useInput.sv Line: 33
+Info (12021): Found 3 design units, including 3 entities, in source file de1_soc.sv
+    Info (12023): Found entity 1: DE1_SoC File: U:/EE271/lab8/DE1_SoC.sv Line: 2
+    Info (12023): Found entity 2: clock_divider File: U:/EE271/lab8/DE1_SoC.sv Line: 121
+    Info (12023): Found entity 3: DE1_SoC_testbench File: U:/EE271/lab8/DE1_SoC.sv Line: 132
+Info (12021): Found 2 design units, including 2 entities, in source file centerlight.sv
+    Info (12023): Found entity 1: centerLight File: U:/EE271/lab8/centerLight.sv Line: 2
+    Info (12023): Found entity 2: centerLight_testbench File: U:/EE271/lab8/centerLight.sv Line: 36
+Info (12021): Found 2 design units, including 2 entities, in source file normallight.sv
+    Info (12023): Found entity 1: normalLight File: U:/EE271/lab8/normalLight.sv Line: 2
+    Info (12023): Found entity 2: normalLight_testbench File: U:/EE271/lab8/normalLight.sv Line: 35
+Info (12021): Found 2 design units, including 2 entities, in source file random.sv
+    Info (12023): Found entity 1: random File: U:/EE271/lab8/random.sv Line: 2
+    Info (12023): Found entity 2: random_testbench File: U:/EE271/lab8/random.sv Line: 19
+Info (12021): Found 2 design units, including 2 entities, in source file compare.sv
+    Info (12023): Found entity 1: compare File: U:/EE271/lab8/compare.sv Line: 2
+    Info (12023): Found entity 2: compare_testbench File: U:/EE271/lab8/compare.sv Line: 36
+Info (12021): Found 2 design units, including 2 entities, in source file matrix_driver.sv
+    Info (12023): Found entity 1: matrix_driver File: U:/EE271/lab8/matrix_driver.sv Line: 2
+    Info (12023): Found entity 2: matrix_driver_testbench File: U:/EE271/lab8/matrix_driver.sv Line: 30
+Info (12021): Found 2 design units, including 2 entities, in source file counter1.sv
+    Info (12023): Found entity 1: counter1 File: U:/EE271/lab8/counter1.sv Line: 3
+    Info (12023): Found entity 2: counter1_testbench File: U:/EE271/lab8/counter1.sv Line: 21
+Info (12021): Found 2 design units, including 2 entities, in source file startcolumn.sv
+    Info (12023): Found entity 1: startColumn File: U:/EE271/lab8/startColumn.sv Line: 2
+    Info (12023): Found entity 2: startColumn_testbench File: U:/EE271/lab8/startColumn.sv Line: 60
+Info (12021): Found 2 design units, including 2 entities, in source file counter3.sv
+    Info (12023): Found entity 1: counter3 File: U:/EE271/lab8/counter3.sv Line: 3
+    Info (12023): Found entity 2: counter3_testbench File: U:/EE271/lab8/counter3.sv Line: 21
+Info (12021): Found 2 design units, including 2 entities, in source file normalcolumn.sv
+    Info (12023): Found entity 1: normalColumn File: U:/EE271/lab8/normalColumn.sv Line: 2
+    Info (12023): Found entity 2: normalColumn_testbench File: U:/EE271/lab8/normalColumn.sv Line: 43
+Info (12021): Found 2 design units, including 2 entities, in source file collision.sv
+    Info (12023): Found entity 1: collision File: U:/EE271/lab8/collision.sv Line: 2
+    Info (12023): Found entity 2: collision_testbench File: U:/EE271/lab8/collision.sv Line: 14
+Info (12021): Found 2 design units, including 2 entities, in source file score.sv
+    Info (12023): Found entity 1: score File: U:/EE271/lab8/score.sv Line: 2
+    Info (12023): Found entity 2: score_testbench File: U:/EE271/lab8/score.sv Line: 35
+Info (12021): Found 2 design units, including 2 entities, in source file increment.sv
+    Info (12023): Found entity 1: increment File: U:/EE271/lab8/increment.sv Line: 2
+    Info (12023): Found entity 2: increment_testbench File: U:/EE271/lab8/increment.sv Line: 28
+Info (12021): Found 2 design units, including 2 entities, in source file highscore.sv
+    Info (12023): Found entity 1: highscore File: U:/EE271/lab8/highscore.sv Line: 2
+    Info (12023): Found entity 2: highscore_testbench File: U:/EE271/lab8/highscore.sv Line: 38
+Info (12021): Found 2 design units, including 2 entities, in source file pausegame.sv
+    Info (12023): Found entity 1: pauseGame File: U:/EE271/lab8/pauseGame.sv Line: 2
+    Info (12023): Found entity 2: pauseGame_testbench File: U:/EE271/lab8/pauseGame.sv Line: 39
+Critical Warning (10846): Verilog HDL Instantiation warning at pauseGame.sv(44): instance has no name File: U:/EE271/lab8/pauseGame.sv Line: 44
+Info (12127): Elaborating entity "DE1_SoC" for the top level hierarchy
+Info (12128): Elaborating entity "clock_divider" for hierarchy "clock_divider:cdiv" File: U:/EE271/lab8/DE1_SoC.sv Line: 38
+Info (12128): Elaborating entity "useInput" for hierarchy "useInput:player" File: U:/EE271/lab8/DE1_SoC.sv Line: 61
+Info (12128): Elaborating entity "counter1" for hierarchy "counter1:countone" File: U:/EE271/lab8/DE1_SoC.sv Line: 64
+Info (12128): Elaborating entity "counter2" for hierarchy "counter2:counttwo" File: U:/EE271/lab8/DE1_SoC.sv Line: 65
+Info (12128): Elaborating entity "counter3" for hierarchy "counter3:countthree" File: U:/EE271/lab8/DE1_SoC.sv Line: 66
+Info (12128): Elaborating entity "normalLight" for hierarchy "normalLight:bird8" File: U:/EE271/lab8/DE1_SoC.sv Line: 69
+Info (12128): Elaborating entity "centerLight" for hierarchy "centerLight:bird5" File: U:/EE271/lab8/DE1_SoC.sv Line: 72
+Info (12128): Elaborating entity "bounds" for hierarchy "bounds:dead1" File: U:/EE271/lab8/DE1_SoC.sv Line: 79
+Info (12128): Elaborating entity "startColumn" for hierarchy "startColumn:initialcol" File: U:/EE271/lab8/DE1_SoC.sv Line: 82
+Info (12128): Elaborating entity "random" for hierarchy "startColumn:initialcol|random:num" File: U:/EE271/lab8/startColumn.sv Line: 27
+Info (12128): Elaborating entity "normalColumn" for hierarchy "normalColumn:col1" File: U:/EE271/lab8/DE1_SoC.sv Line: 84
+Info (12128): Elaborating entity "collision" for hierarchy "collision:dead2" File: U:/EE271/lab8/DE1_SoC.sv Line: 101
+Info (12128): Elaborating entity "score" for hierarchy "score:s0" File: U:/EE271/lab8/DE1_SoC.sv Line: 104
+Info (12128): Elaborating entity "increment" for hierarchy "increment:s1" File: U:/EE271/lab8/DE1_SoC.sv Line: 105
+Info (12128): Elaborating entity "highscore" for hierarchy "highscore:hi" File: U:/EE271/lab8/DE1_SoC.sv Line: 110
+Info (12128): Elaborating entity "compare" for hierarchy "highscore:hi|compare:com0" File: U:/EE271/lab8/highscore.sv Line: 8
+Info (12128): Elaborating entity "seg7" for hierarchy "highscore:hi|seg7:seg0" File: U:/EE271/lab8/highscore.sv Line: 30
+Info (12128): Elaborating entity "pauseGame" for hierarchy "pauseGame:stop" File: U:/EE271/lab8/DE1_SoC.sv Line: 113
+Info (12128): Elaborating entity "matrix_driver" for hierarchy "matrix_driver:out" File: U:/EE271/lab8/DE1_SoC.sv Line: 116
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 17 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file U:/EE271/lab8/output_files/DE1_SoC.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 416 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 15 input pins
+    Info (21059): Implemented 88 output pins
+    Info (21061): Implemented 313 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 4877 megabytes
+    Info: Processing ended: Wed Nov 28 14:56:48 2018
+    Info: Elapsed time: 00:00:32
+    Info: Total CPU time (on all processors): 00:00:26
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in U:/EE271/lab8/output_files/DE1_SoC.map.smsg.
+
+

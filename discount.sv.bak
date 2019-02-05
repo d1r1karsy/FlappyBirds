@@ -1,0 +1,24 @@
+module discount (disc, u, p, c);
+	input logic u, p, c;
+	output logic disc;
+	
+	assign disc = p | (u & c);
+endmodule
+
+module discount_testbench();    
+   logic  disc, u, p, c;
+	
+   discount dut (.disc, .u, .p, .c);
+   
+	// Try all combinations of inputs.
+   initial begin
+		u = 0; p = 0; c = 0; #10;
+		u = 0; p = 0; c = 1; #10;
+		u = 0; p = 1; c = 0; #10;
+		u = 0; p = 1; c = 1; #10;
+		u = 1; p = 0; c = 0; #10;
+		u = 1; p = 0; c = 1; #10;
+		u = 1; p = 1; c = 0; #10;
+		u = 1; p = 1; c = 1; #10;
+   end
+endmodule 

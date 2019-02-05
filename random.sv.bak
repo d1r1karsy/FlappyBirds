@@ -1,0 +1,15 @@
+module random (clk, reset, number);
+	input logic clk,    // Clock
+	input logic reset,  // Asynchronous reset active low
+	output logic [9:0] out
+	
+	always @(posedge clk) begin
+		if(reset)
+			out <= 10'b0000000000;
+		else	begin
+			out[8:0] <= out[9:1];
+			out[9] <= (out[9] & out[6]) | (~out[9] & ~out[6]);
+			end
+		end
+
+endmodule

@@ -1,0 +1,32 @@
+module stolen (stol, u, p, c, mark);
+	input logic u, p, c, mark;
+	output logic disc;
+	
+	assign stol = (u & ~p & ~mark) | (~p & ~c & ~mark);
+endmodule
+
+module discount_testbench();    
+   logic  disc, u, p, c, mark;
+	
+   discount dut (.disc, .u, .p, .c, .mark);
+   
+	// Try all combinations of inputs.
+   initial begin
+		u = 0; p = 0; c = 0; mark = 0; #10;
+									mark = 1; #10;
+				        c = 1; mark = 0; #10;
+									mark = 1; #10;
+				 p = 1; c = 0; mark = 0; #10;
+									mark = 1; #10;
+				        c = 1; mark = 0; #10;
+									mark = 1; #10;
+		u = 1; p = 0; c = 0; mark = 0; #10;
+									mark = 1; #10;
+				        c = 1; mark = 0; #10;
+									mark = 1; #10;
+				 p = 1; c = 0; mark = 0; #10;
+									mark = 1; #10;
+						  c = 1; mark = 0; #10;
+									mark = 1; #10;
+   end
+endmodule 

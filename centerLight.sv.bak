@@ -1,0 +1,6 @@
+module centerLight (clk, reset, L, R, NL, NR, light);
+	input logic clk, reset, L, R, NL, NR;
+	output logic light;
+	
+
+endmodule 

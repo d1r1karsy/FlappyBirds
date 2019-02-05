@@ -1,0 +1,16 @@
+module items (let0, let1, let2, let3, let4, let5, upc);
+	input  logic [2:0] upc;
+	output logic [6:0] let0, let1, let2, let3, let4, let5;
+	
+	always_comb begin
+		case (upc)
+			3'b000: let0 = 7'b1101101; let1 = 7'b1110110; let2 = 7'b0000110; let3 = 7'b1010000; let4 = 7'b1111000; let5 = 7'b0000000; //SHIrt
+			3'b001: let0 = 7'b1110111; let1 = 7'b1110011; let2 = 7'b1110011; let3 = 7'b0111000; let4 = 7'b1111001; let5 = 7'b0000000; //APPLE
+			3'b011: let0 = 7'b1111111; let1 = 7'b1110111; let2 = 7'b0111000; let3 = 7'b0111000; let4 = 7'b0000000; let5 = 7'b0000000; //BALL
+			3'b100: let0 = 7'b1111101; let1 = 7'b0111000; let2 = 7'b1110111; let3 = 7'b1101101; let4 = 7'b1101101; let5 = 7'b0000000; //GLASS
+			3'b101: let0 = 7'b1111111; let1 = 7'b1111001; let2 = 7'b0111000; let3 = 7'b1111000; let4 = 7'b0000000; let5 = 7'b0000000; //BELt
+			3'b110: let0 = 7'b1010000; let1 = 7'b0111111; let2 = 7'b1110011; let3 = 7'b1111001; let4 = 7'b0000000; let5 = 7'b0000000; //rOPE
+			default: let0 = 7'bX; let1 = 7'bX; let2 = 7'bX; let3 = 7'bX; let4 = 7'bX; let5 = 7'bX;
+		endcase
+	end
+endmodule 

@@ -1,0 +1,12 @@
+module counter1 (clk, reset, enable);
+   input  logic clk, reset;
+	output logic enable;
+	logic [9:0] counter;
+	
+	always_ff @(posedge clk) 
+		counter <= counter + 10'b0000000001; 
+		
+	assign enable = (counter == 10'b000000000);
+endmodule;
+	
+	

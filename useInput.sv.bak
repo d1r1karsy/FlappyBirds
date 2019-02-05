@@ -1,0 +1,60 @@
+module useInput (clk, reset, keyin, keyout);
+	input logic clk, reset, keyin;
+	output logic keyout;
+	
+	enum { OneOne, OneZero, ZeroZero } ps, ns;
+	
+	always_comb begin
+		case (ps)
+ 			OneOne  : if(keyin) ns = OneZero;
+						 else		  ns = OneOne;
+			OneZero : if(keyin) ns = ZeroZero;
+						 else		  ns = OneOne;
+			ZeroZero: if(keyin) ns = ZeroZero;
+						 else		  ns = OneOne;
+		endcase
+	end
+
+	assign keyout = (ns == OneZero);
+	
+	always_ff @(posedge clk) begin
+		if (reset)
+			ps <= ZeroZero;
+		else
+			ps <= ns;
+	end
+endmodule 
+
+module unseInput_testbench();
+	logic clk, reset, keyin;
+	logic keyout;
+	
+	useInput dut (.clk, .reset, .keyin, .keyout);
+	
+	parameter CLOCK_PERIOD=100;
+	initial begin
+		clk <= 0;
+		forever #(CLOCK_PERIOD/2) clk <= ~clk;
+	end
+	
+	initial begin
+										@(posedge clk);
+		reset <= 1;					@(posedge clk);
+										@(posedge clk);
+		reset <= 0; keyin <= 0;	@(posedge clk);
+									   @(posedge clk);
+						keyin <= 1;	@(posedge clk);
+										@(posedge clk);
+						keyin <= 0;	@(posedge clk);
+									   @(posedge clk);
+						keyin <= 1;	@(posedge clk);
+										@(posedge clk);
+						keyin <= 1;	@(posedge clk);
+										@(posedge clk);
+						keyin <= 1;	@(posedge clk);
+										@(posedge clk);
+						keyin <= 0;	@(posedge clk);
+										@(posedge clk);
+		$stop;
+	end
+endmodule 

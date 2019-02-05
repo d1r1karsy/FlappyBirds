@@ -1,0 +1,21 @@
+module bird (clk, reset, key, died, light);
+	input  logic clk, reset, key;
+	output logic died;
+	output logic [7:0] light;
+	
+	enum { Stopped, Eight, Seven, Six, Five, Four, Three, Two, One } ps, ns;
+	
+	always_comb begin
+		case (ps)
+			Stopped: if (key) begin ns = Six; 
+			Eight:
+			Seven:
+			Six:
+			Five:
+			Four:
+			Three:
+			Two:
+			One:
+		endcase;
+	end
+	

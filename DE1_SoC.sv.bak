@@ -1,0 +1,137 @@
+// Top-level module defining I/Os for the DE1_SoC board
+module  DE1_SoC (CLOCK_50, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW, GPIO_0);   
+   input  logic         CLOCK_50; // 50MHz clock.   
+   output logic  [6:0]  HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;     
+   output logic  [9:0]  LEDR; 
+	output logic  [35:0] GPIO_0;
+   input  logic  [3:0]  KEY; 
+   input  logic  [9:0]  SW;  
+	
+	// Default values for unused HEXs and LEDs
+	// Default values for unused HEXs and LEDs
+	assign HEX0 = 7'b1111111;
+	assign HEX1 = 7'b1111111;
+	assign HEX2 = 7'b1111111;
+   assign HEX3 = 7'b1111111;
+   assign HEX4 = 7'b1111111;
+	assign HEX5 = 7'b1111111;
+	assign LEDR[9:0] = 10'b0000000000;
+	assign GPIO_0[11:0] = 12'b000000000000;
+	
+	// Generate clk off of CLOCK_50, whichClock picks rate. 
+   logic [31:0] clk;  
+   parameter whichClock = 14;  
+   clock_divider cdiv (CLOCK_50, clk); 
+		
+	logic key0, key0_1, reset, died;
+	
+	// Define the reset switch
+	assign reset = SW[9];
+
+	// Put the user inputs through 2 DFFs. CAUSE THE RESET PROBLEM 
+	always_ff @(posedge CLOCK_50) begin
+		if (reset) begin
+			key0 <= 1'b1;
+		end
+		else begin
+			key0_1 <= KEY[0];
+			key0 <= key0_1;
+		end
+	end
+	
+	// User input only true for 1 clock cycle when a key is pressed and generate computer input
+	logic input1;
+	//logic [9:0] random_number;
+	//random num (.clk(CLOCK_50), .reset(reset1 | reset2), .number(random_number));
+	//compare switches (.A(random_number), .B(SW[8:0] + 10'b0), .out(key3));
+	useInput player (.clk(CLOCK_50), .reset(died | reset), .keyin(~key0), .keyout(input1));
+	logic enable1;
+	counter1 one (.clk(CLOCK_50), .reset, .enable(enable1));
+	logic [7:0][7:0] green_array, red_array;
+
+	always_comb begin
+			green_array[0]  	= 8'b00000000;
+			red_array[0][7] 	= 1'b0;
+			red_array[0][5:0] = 6'b000000;
+			green_array[1]  	= 8'b00000000;
+			red_array[1][7] 	= 1'b0;
+			red_array[1][5:0] = 6'b000000;
+			green_array[2]  	= 8'b00000000;
+			red_array[2][7] 	= 1'b0;
+			red_array[2][5:0] = 6'b000000;
+			green_array[3]  	= 8'b00000000;
+			red_array[3][7] 	= 1'b0;
+			red_array[3][5:0] = 6'b000000;
+			green_array[4]  	= 8'b00000000;
+			red_array[4][7] 	= 1'b0;
+			red_array[4][5:0] = 6'b000000;
+			green_array[5]  	= 8'b00000000;
+			red_array[5][7] 	= 1'b0;
+			red_array[5][5:0] = 6'b000000;
+			green_array[6]  	= 8'b00000000;
+			red_array[6][7] 	= 1'b0;
+			red_array[6][5:0] = 6'b000000;
+			green_array[7]  	= 8'b00000000;
+			red_array[7][7] 	= 1'b0;
+			red_array[7][5:0] = 6'b000000;
+	end
+	normalLight bird8 (.clk(enable1), .reset, .key(input1), .top(1'b0), 				.bottom(red_array[7][6]), .light(red_array[8][6]));
+	normalLight bird7 (.clk(enable1), .reset, .key(input1), .top(red_array[8][6]), .bottom(red_array[6][6]), .light(red_array[7][6]));
+	centerLight bird6 (.clk(enable1), .reset, .key(input1), .top(red_array[7][6]), .bottom(red_array[5][6]), .light(red_array[6][6]));
+	normalLight bird5 (.clk(enable1), .reset, .key(input1), .top(red_array[6][6]), .bottom(red_array[4][6]), .light(red_array[5][6]));
+	normalLight bird4 (.clk(enable1), .reset, .key(input1), .top(red_array[5][6]), .bottom(red_array[3][6]), .light(red_array[4][6]));
+	normalLight bird3 (.clk(enable1), .reset, .key(input1), .top(red_array[4][6]), .bottom(red_array[2][6]), .light(red_array[3][6]));
+	normalLight bird2 (.clk(enable1), .reset, .key(input1), .top(red_array[3][6]), .bottom(red_array[1][6]), .light(red_array[2][6]));
+	normalLight bird1 (.clk(enable1), .reset, .key(input1), .top(red_array[2][6]), .bottom(1'b0), 			  .light(red_array[1][6]));
+
+	matrix_driver out (.clk(CLOCK_50), .red_array, .green_array, .red_driver(GPIO_0[27:20]), .green_driver(GPIO_0[35:28]), .row_sink(GPIO_0[19:12]));
+	
+endmodule 
+
+// divided_clocks[0] = 25MHz, [1] = 12.5Mhz, ... [23] = 3Hz, [24] = 1.5Hz, [25] = 0.75Hz, ...    
+module clock_divider (clock, divided_clocks); 
+   input  logic          clock;  
+   output logic  [31:0]  divided_clocks = 0;
+	
+   always_ff @(posedge clock) begin  
+      divided_clocks <= divided_clocks + 1;   
+   end    
+	
+endmodule 
+
+// Test the DE1_SoC module
+module DE1_SoC_testbench();
+   logic         clk;  
+   logic  [6:0]  HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;     
+   logic  [9:0]  LEDR;        
+   logic  [3:0]  KEY; 
+   logic  [9:0]  SW; 
+	logic  [35:0] GPIO_0;
+	
+	DE1_SoC dut (.CLOCK_50(clk), .HEX0, .HEX1, .HEX2, .HEX3, .HEX4, .HEX5, .KEY, .LEDR, .SW, .GPIO_0);
+	
+	// Setup the test clock
+	parameter CLOCK_PERIOD=100;
+	initial begin
+		clk <= 0;
+		forever #(CLOCK_PERIOD/2) clk <= ~clk;
+	end
+	
+	// Setup the inputs to the design
+	initial begin
+																						 @(posedge clk);
+		SW[9] <= 1;														repeat(4) @(posedge clk);
+		SW[9] <= 0; KEY[0] <= 1; 									repeat(16) @(posedge clk);
+						KEY[0] <= 0;	@(posedge clk);
+						KEY[0] <= 1; @(posedge clk);
+
+																repeat(1000) @(posedge clk);
+						KEY[0] <= 1;  									repeat(25)@(posedge clk);
+						KEY[0] <= 0;									repeat(4) @(posedge clk);
+						KEY[0] <= 1;									repeat(4) @(posedge clk);
+																			repeat(25)@(posedge clk);
+		$stop;
+	end
+	
+endmodule  
+     
